@@ -19,7 +19,9 @@ setw () {
 }
 
 register_placeholder() {
-  echo "#{$1}#($2)"
+  local placeholder="\#{$1}"
+  local script="#(#2)"
+  echo "${""/placeholder/script}"
 }
 
 debug() {
