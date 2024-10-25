@@ -20,8 +20,12 @@ setw () {
 
 register_placeholder() {
   local placeholder="\#{$1}"
-  local script="#(#2)"
-  echo "${""/placeholder/script}"
+  local script="#($2)"
+  echo "${/placeholder/script}"
+}
+
+get_bash_dir() {
+  echo "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 }
 
 debug() {

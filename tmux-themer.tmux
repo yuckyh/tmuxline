@@ -5,7 +5,7 @@ source "./utils.sh"
 main () {
   debug "hello world!"
 
-  register_placeholder "spotify" "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/providers/spotify.sh"
+  seto "@spotify" "$(get_bash_dir)/providers/spotify.sh"
 }
 
 main
