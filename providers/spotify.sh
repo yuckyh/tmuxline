@@ -8,25 +8,24 @@ get_spotify () {
     return
   fi
 
-  local dest="org.mpris.MediaPlayer2.spotify"
+  local object="org.mpris.MediaPlayer2.spotify"
   local path="/org/mpris/MediaPlayer2"
-  local method="org.freedesktop.Properties.Get"
+  local method="org.freedesktop.DBus.Properties.Get"
 
-  local META=$( dbus-send --print-reply --dest=$dest $path $method string:'org.mpris.MediaPlayer2.Player' string:'Metadata')
+  local meta=$(dbus-send --print-reply --dest=$object $path $method string:'org.mpris.MediaPlayer2.Player' string:'Metadata')
 
-  local ARTIST=$( echo "$META" | grep -m 1 "xesam:artist" -b2 | tail -n1 | grep -o '".*"' | sed 's/"//g' ) 
+  local artist=$(echo "$meta" | grep -m 1 "xesam:artist" -b2 | tail -n1 | grep -o '".*"' | sed 's/"//g') 
 
-  local SONG_TITLE=$( echo "$META" | grep -m 1 "xesam:title" -b1 | tail -n1 | grep -o '".*"' | sed 's/"//g' )
+  local song_title=$( echo "$meta" | grep -m 1 "xesam:title" -b1 | tail -n1 | grep -o '".*"' | sed 's/"//g')
 
-  local PLAYING=$( dbus-send --print-reply --dest=$dest $path $method string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' | grep -o Playing )
+  local playing=$(dbus-send --print-reply --dest=$object $path $method string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' | grep -o Playing)
 
-  if [ "$PLAYING" ]; then
-    ICON="♫"
+  if [ "$playing" ]; then
+    icon="♫"
   else
-    ICON="⏸"
+    icon="⏸"
   fi
 
-  echo "$ICON $ARTIST - $SONG_TITLE"
+  echo "$icon $artist - $song_title"
 }
 
-get_spotify
