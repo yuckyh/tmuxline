@@ -5,7 +5,9 @@ source "./utils.sh"
 main () {
   debug "hello world!"
 
-  seto "@spotify" "$(get_bash_dir)/providers/spotify.sh"
+  local bash_dir="$(get_bash_dir)"
+
+  seto "@spotify" "$(sh '$bash_dir/providers/spotify.sh')"
 }
 
 main
