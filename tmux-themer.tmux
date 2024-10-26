@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 source "./utils.sh"
-source "./providers/spotify.sh"
 
 main () {
   local bash_dir="$(get_bash_dir)"
+  local spotify_provider="$bash_dir/providers/spotify.sh"
 
-  seto "@spotify" "$(get_spotify)"
+  register_module_placeholder "spotify" $spotify_provider
 }
 
 main

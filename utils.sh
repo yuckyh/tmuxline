@@ -18,10 +18,17 @@ setw () {
   tmux setw -gq "$1" "$2"
 }
 
-register_placeholder() {
+register_module_placeholder() {
   local placeholder="\#{$1}"
   local script="#($2)"
-  echo "${/placeholder/script}"
+
+  local status="status-right"
+
+  local status_right="$(geto $status)"
+
+  local new_content="${status_right/$placeholder/$script}"
+
+  seto "$status" "$new_content"
 }
 
 get_bash_dir() {
