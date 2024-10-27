@@ -29,3 +29,5 @@ get_spotify () {
   echo "$icon $artist - $song_title"
 }
 
+get_spotify
+
