@@ -8,9 +8,9 @@ get_spotify () {
     return
   fi
 
-  local object="org.mpris.MediaPlayer2.spotify"
-  local path="/org/mpris/MediaPlayer2"
-  local method="org.freedesktop.DBus.Properties.Get"
+  local object=org.mpris.MediaPlayer2.spotify
+  local path=/org/mpris/MediaPlayer2
+  local method=org.freedesktop.DBus.Properties.Get
 
   local meta=$(dbus-send --print-reply --dest=$object $path $method string:'org.mpris.MediaPlayer2.Player' string:'Metadata')
 

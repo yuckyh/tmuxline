@@ -21,14 +21,24 @@ setw () {
 register_module_placeholder() {
   local placeholder="\#{$1}"
   local script="#($2)"
+  local property="$3"
 
-  local status="status-right"
+  local content="$(geto $property)"
 
-  local status_right="$(geto $status)"
+  local new_content="${content/$placeholder/$script}"
 
-  local new_content="${status_right/$placeholder/$script}"
+  seto "$property" "$new_content"
+}
 
-  seto "$status" "$new_content"
+get_theme_config() {
+  local -n config=$1
+  local left_separator=$(geto "@left-separator")
+  local right_separator=$(geto "@right-separator")
+  local fg=$(geto "@fg")
+  local bg=$(geto "@bg")
+  local content_bg="$(geto "@content-bg")"
+
+  config=($left_separator $right_separator $fg $bg $content_bg)
 }
 
 get_bash_dir() {
