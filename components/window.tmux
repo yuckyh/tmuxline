@@ -1,0 +1,18 @@
+set  -g @window-flag-icon "#{?window_activity_flag, 󱅫,}"
+set -ag @window-flag-icon "#{?window_bell_flag, 󰂞,}"
+set -ag @window-flag-icon "#{?window_silence_flag, 󰂛,}"
+set -ag @window-flag-icon "#{?window_active, 󰖯,}"
+set -ag @window-flag-icon "#{?window_last_flag, 󰖰,}"
+set -ag @window-flag-icon "#{?window_marked_flag, 󰃀,}"
+set -ag @window-flag-icon "#{?window_zoomed_flag, 󰁌,}"
+
+set  -g @window-status " "
+set -ag @window-status "#[#{E:@head-style} fg=color9]"
+set -ag @window-status "#{@left-separator}"
+set -ag @window-status "#[#{E:@icon-style} bg=color9]"
+set -ag @window-status "#I"
+set -ag @window-status "#[#{E:@content-style}]"
+set -ag @window-status "#W #{E:@window-flag-icon}"
+set -ag @window-status "#[#{E:@tail-style}]"
+set -ag @window-status "#{@right-separator}"
+
